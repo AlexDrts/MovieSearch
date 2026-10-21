@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MovieSearch.API/MovieSearch.API.csproj" />
+  <Project Path="MovieSearch.BLL/MovieSearch.BLL.csproj" />
+  <Project Path="MovieSearch.DAL/MovieSearch.DAL.csproj" />
+</Solution>

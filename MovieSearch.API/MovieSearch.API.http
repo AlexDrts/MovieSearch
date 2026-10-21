@@ -1,0 +1,39 @@
+@host = http://localhost:5074
+
+GET {{host}}/api/movies
+
+###
+
+GET {{host}}/api/movies/1
+
+###
+
+POST {{host}}/api/movies
+Content-Type: application/json
+
+{
+  "title": "Дюна",
+  "director": "Дені Вільнев",
+  "genre": "Наукова фантастика",
+  "releaseYear": 2021,
+  "posterPath": null,
+  "description": "Пол Атрід вирушає на небезпечну планету Арракіс."
+}
+
+###
+
+PUT {{host}}/api/movies/11
+Content-Type: application/json
+
+{
+  "title": "Дюна: Частина перша",
+  "director": "Дені Вільнев",
+  "genre": "Наукова фантастика",
+  "releaseYear": 2021,
+  "posterPath": null,
+  "description": "Пол Атрід вирушає на небезпечну планету Арракіс."
+}
+
+###
+
+DELETE {{host}}/api/movies/11
