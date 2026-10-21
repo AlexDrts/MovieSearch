@@ -44,7 +44,7 @@ namespace MovieSearch.API.Controllers
         public async Task<ActionResult<MovieDto>> Update(int id, MovieRequest request)
         {
             if (!await movieService.UpdateAsync(id, ToDto(request))) return NotFound();
-            return await movieService.GetByIdAsync(id);
+            return (await movieService.GetByIdAsync(id))!;
         }
 
         [HttpDelete("{id}")]

@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using MovieSearch.DAL.Entities;
 using MovieSearch.DAL.Interfaces;
 
@@ -13,32 +12,49 @@ namespace MovieSearch.DAL.Repositories
             db = context;
         }
 
-        public async Task<List<Movie>> GetAllAsync()
+        public Task<List<Movie>> GetAllAsync()
         {
-            return await db.Movies.OrderBy(m => m.Id).ToListAsync();
+            lock (db.Movies)
+            {
+                return Task.FromResult(db.Movies.OrderBy(m => m.Id).ToList());
+            }
         }
 
-        public async Task<Movie?> GetByIdAsync(int id)
+        public Task<Movie?> GetByIdAsync(int id)
         {
-            return await db.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            lock (db.Movies)
+            {
+                return Task.FromResult(db.Movies.FirstOrDefault(m => m.Id == id));
+            }
         }
 
-        public async Task AddAsync(Movie movie)
+        public Task AddAsync(Movie movie)
         {
-            db.Movies.Add(movie);
-            await db.SaveChangesAsync();
+            lock (db.Movies)
+            {
+                movie.Id = db.Movies.Count == 0 ? 1 : db.Movies.Max(m => m.Id) + 1;
+                db.Movies.Add(movie);
+            }
+            return Task.CompletedTask;
         }
 
-        public async Task UpdateAsync(Movie movie)
+        public Task UpdateAsync(Movie movie)
         {
-            db.Movies.Update(movie);
-            await db.SaveChangesAsync();
+            lock (db.Movies)
+            {
+                var index = db.Movies.FindIndex(m => m.Id == movie.Id);
+                if (index >= 0) db.Movies[index] = movie;
+            }
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(Movie movie)
+        public Task DeleteAsync(Movie movie)
         {
-            db.Movies.Remove(movie);
-            await db.SaveChangesAsync();
+            lock (db.Movies)
+            {
+                db.Movies.Remove(movie);
+            }
+            return Task.CompletedTask;
         }
     }
 }

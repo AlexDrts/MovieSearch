@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MovieSearch.BLL.Interfaces;
 using MovieSearch.BLL.Services;
@@ -10,9 +9,9 @@ namespace MovieSearch.BLL
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBusinessLogic(this IServiceCollection services, string? connection)
+        public static IServiceCollection AddBusinessLogic(this IServiceCollection services)
         {
-            services.AddDbContext<MovieContext>(options => options.UseSqlServer(connection));
+            services.AddSingleton<MovieContext>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IFileService, FileService>();

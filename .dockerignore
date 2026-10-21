@@ -1,0 +1,6 @@
+**/bin
+**/obj
+**/.vs
+**/node_modules
+.git
+movie-search-react
