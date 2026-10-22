@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "🎬 Кінопошук",
+    "addMovie": "+ Додати фільм",
+    "language": "Мова"
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "save": "Зберегти",
+    "saving": "Збереження...",
+    "cancel": "Скасувати",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "details": "Детальніше",
+    "backToList": "← Назад до списку",
+    "home": "На головну"
+  },
+  "list": {
+    "title": "Топ-10 найкращих фільмів",
+    "empty": "Список фільмів порожній.",
+    "loadError": "Не вдалося завантажити фільми. Перевірте, чи запущений сервер.",
+    "director": "Режисер:"
+  },
+  "details": {
+    "releaseYear": "Рік випуску:",
+    "director": "Режисер:",
+    "genre": "Жанр:",
+    "notFound": "Фільм не знайдено",
+    "confirmDelete": "Видалити фільм «{{title}}»?"
+  },
+  "form": {
+    "addTitle": "Додати фільм",
+    "editTitle": "Редагувати: {{title}}",
+    "fields": {
+      "title": "Назва",
+      "director": "Режисер",
+      "genre": "Жанр",
+      "releaseYear": "Рік випуску",
+      "description": "Опис",
+      "posterFile": "Постер (файл з пристрою)",
+      "posterUrl": "або посилання на постер (URL)"
+    },
+    "errors": {
+      "fileType": "Дозволені лише зображення: jpg, jpeg, png, webp, gif"
+    }
+  },
+  "notFound": {
+    "title": "Сторінку не знайдено"
+  }
+}

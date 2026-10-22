@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { createMovie, getMovie, updateMovie, uploadPoster } from '../api.js'
 
 const emptyMovie = {
@@ -14,13 +15,14 @@ const emptyMovie = {
 const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
 
 const fields = [
-  { name: 'title', label: 'Назва' },
-  { name: 'director', label: 'Режисер' },
-  { name: 'genre', label: 'Жанр' },
-  { name: 'releaseYear', label: 'Рік випуску', type: 'number' },
+  { name: 'title' },
+  { name: 'director' },
+  { name: 'genre' },
+  { name: 'releaseYear', type: 'number' },
 ]
 
 export default function MovieForm() {
+  const { t } = useTranslation()
   const { id } = useParams()
   const isEdit = Boolean(id)
   const navigate = useNavigate()
@@ -45,7 +47,7 @@ export default function MovieForm() {
     setErrors({})
 
     if (file && !allowedExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))) {
-      setErrors({ file: ['Дозволені лише зображення: jpg, jpeg, png, webp, gif'] })
+      setErrors({ file: [t('form.errors.fileType')] })
       return
     }
 
@@ -74,11 +76,11 @@ export default function MovieForm() {
 
   return (
     <form onSubmit={handleSubmit} className="movie-form">
-      <h2>{isEdit ? `Редагувати: ${movie.title}` : 'Додати фільм'}</h2>
+      <h2>{isEdit ? t('form.editTitle', { title: movie.title }) : t('form.addTitle')}</h2>
 
       {fields.map((field) => (
         <div key={field.name} className="field">
-          <label htmlFor={field.name}>{field.label}</label>
+          <label htmlFor={field.name}>{t(`form.fields.${field.name}`)}</label>
           <input
             id={field.name}
             name={field.name}
@@ -91,13 +93,13 @@ export default function MovieForm() {
       ))}
 
       <div className="field">
-        <label htmlFor="description">Опис</label>
+        <label htmlFor="description">{t('form.fields.description')}</label>
         <textarea id="description" name="description" rows="4" value={movie.description} onChange={handleChange} />
         {errorFor('description') && <span className="field-error">{errorFor('description')}</span>}
       </div>
 
       <div className="field">
-        <label htmlFor="posterFile">Постер (файл з пристрою)</label>
+        <label htmlFor="posterFile">{t('form.fields.posterFile')}</label>
         <input
           id="posterFile"
           type="file"
@@ -108,15 +110,15 @@ export default function MovieForm() {
       </div>
 
       <div className="field">
-        <label htmlFor="posterPath">або посилання на постер (URL)</label>
+        <label htmlFor="posterPath">{t('form.fields.posterUrl')}</label>
         <input id="posterPath" name="posterPath" value={movie.posterPath} onChange={handleChange} />
       </div>
 
       <div className="actions">
         <button type="submit" className="btn btn-success" disabled={saving}>
-          {saving ? 'Збереження...' : 'Зберегти'}
+          {saving ? t('common.saving') : t('common.save')}
         </button>
-        <Link to={isEdit ? `/movies/${id}` : '/'} className="btn btn-secondary">Скасувати</Link>
+        <Link to={isEdit ? `/movies/${id}` : '/'} className="btn btn-secondary">{t('common.cancel')}</Link>
       </div>
     </form>
   )

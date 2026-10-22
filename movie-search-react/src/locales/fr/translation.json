@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "🎬 Recherche de films",
+    "addMovie": "+ Ajouter un film",
+    "language": "Langue"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "details": "Détails",
+    "backToList": "← Retour à la liste",
+    "home": "Accueil"
+  },
+  "list": {
+    "title": "Top 10 des meilleurs films",
+    "empty": "La liste des films est vide.",
+    "loadError": "Impossible de charger les films. Vérifiez que le serveur est lancé.",
+    "director": "Réalisateur :"
+  },
+  "details": {
+    "releaseYear": "Année de sortie :",
+    "director": "Réalisateur :",
+    "genre": "Genre :",
+    "notFound": "Film introuvable",
+    "confirmDelete": "Supprimer le film « {{title}} » ?"
+  },
+  "form": {
+    "addTitle": "Ajouter un film",
+    "editTitle": "Modifier : {{title}}",
+    "fields": {
+      "title": "Titre",
+      "director": "Réalisateur",
+      "genre": "Genre",
+      "releaseYear": "Année de sortie",
+      "description": "Description",
+      "posterFile": "Affiche (fichier de votre appareil)",
+      "posterUrl": "ou lien vers l’affiche (URL)"
+    },
+    "errors": {
+      "fileType": "Seules les images sont autorisées : jpg, jpeg, png, webp, gif"
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "header": {
+    "title": "🎬 Movie Search",
+    "addMovie": "+ Add movie",
+    "language": "Language"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "details": "Details",
+    "backToList": "← Back to list",
+    "home": "Home"
+  },
+  "list": {
+    "title": "Top 10 best movies",
+    "empty": "The movie list is empty.",
+    "loadError": "Could not load movies. Check that the server is running.",
+    "director": "Director:"
+  },
+  "details": {
+    "releaseYear": "Release year:",
+    "director": "Director:",
+    "genre": "Genre:",
+    "notFound": "Movie not found",
+    "confirmDelete": "Delete the movie “{{title}}”?"
+  },
+  "form": {
+    "addTitle": "Add movie",
+    "editTitle": "Edit: {{title}}",
+    "fields": {
+      "title": "Title",
+      "director": "Director",
+      "genre": "Genre",
+      "releaseYear": "Release year",
+      "description": "Description",
+      "posterFile": "Poster (file from your device)",
+      "posterUrl": "or poster link (URL)"
+    },
+    "errors": {
+      "fileType": "Only images are allowed: jpg, jpeg, png, webp, gif"
+    }
+  },
+  "notFound": {
+    "title": "Page not found"
+  }
+}

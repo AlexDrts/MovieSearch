@@ -1,27 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getMovies, posterUrl } from '../api.js'
 
 export default function MovieList() {
+  const { t } = useTranslation()
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     getMovies()
       .then(setMovies)
-      .catch(() => setError('Не вдалося завантажити фільми. Перевірте, чи запущений сервер.'))
+      .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [])
 
-  if (loading) return <p className="message">Завантаження...</p>
-  if (error) return <p className="message error">{error}</p>
+  if (loading) return <p className="message">{t('common.loading')}</p>
+  if (error) return <p className="message error">{t('list.loadError')}</p>
 
   return (
     <>
-      <h2>Топ-10 найкращих фільмів</h2>
+      <h2>{t('list.title')}</h2>
 
-      {movies.length === 0 && <p className="message">Список фільмів порожній.</p>}
+      {movies.length === 0 && <p className="message">{t('list.empty')}</p>}
 
       <div className="movies-grid">
         {movies.map((movie) => (
@@ -30,9 +32,9 @@ export default function MovieList() {
             <div className="movie-body">
               <h4>{movie.title}</h4>
               <p className="movie-meta">{movie.releaseYear} · {movie.genre}</p>
-              <p className="movie-director"><strong>Режисер:</strong> {movie.director}</p>
+              <p className="movie-director"><strong>{t('list.director')}</strong> {movie.director}</p>
               <p className="movie-description">{movie.description}</p>
-              <Link to={`/movies/${movie.id}`} className="btn btn-primary">Детальніше</Link>
+              <Link to={`/movies/${movie.id}`} className="btn btn-primary">{t('common.details')}</Link>
             </div>
           </div>
         ))}
