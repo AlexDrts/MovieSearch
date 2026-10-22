@@ -1,6 +1,9 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.EntityFrameworkCore;
 using MovieSearch.BLL;
+using MovieSearch.DAL;
+using MovieSearch.DAL.Interfaces;
 
 namespace MovieSearch.API
 {
@@ -9,6 +12,15 @@ namespace MovieSearch.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            if (string.IsNullOrEmpty(connection))
+                builder.Services.AddDbContext<MovieDbContext>(options => options.UseInMemoryDatabase("Movies"));
+            else
+                builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(connection));
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddBusinessLogic();
 

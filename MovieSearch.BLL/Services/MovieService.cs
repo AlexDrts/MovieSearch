@@ -7,22 +7,22 @@ namespace MovieSearch.BLL.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly IMovieRepository repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public MovieService(IMovieRepository movieRepository)
+        public MovieService(IUnitOfWork unitOfWork)
         {
-            repository = movieRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<List<MovieDto>> GetAllAsync()
         {
-            var movies = await repository.GetAllAsync();
-            return movies.Select(ToDto).ToList();
+            var movies = await unitOfWork.Movies.GetAllAsync();
+            return movies.OrderBy(m => m.Id).Select(ToDto).ToList();
         }
 
         public async Task<MovieDto?> GetByIdAsync(int id)
         {
-            var movie = await repository.GetByIdAsync(id);
+            var movie = await unitOfWork.Movies.GetByIdAsync(id);
             return movie == null ? null : ToDto(movie);
         }
 
@@ -30,26 +30,29 @@ namespace MovieSearch.BLL.Services
         {
             var movie = new Movie();
             CopyToEntity(dto, movie);
-            await repository.AddAsync(movie);
+            await unitOfWork.Movies.AddAsync(movie);
+            await unitOfWork.SaveChangesAsync();
             return movie.Id;
         }
 
         public async Task<bool> UpdateAsync(int id, MovieDto dto)
         {
-            var movie = await repository.GetByIdAsync(id);
+            var movie = await unitOfWork.Movies.GetByIdAsync(id);
             if (movie == null) return false;
 
             CopyToEntity(dto, movie);
-            await repository.UpdateAsync(movie);
+            unitOfWork.Movies.Update(movie);
+            await unitOfWork.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var movie = await repository.GetByIdAsync(id);
+            var movie = await unitOfWork.Movies.GetByIdAsync(id);
             if (movie == null) return false;
 
-            await repository.DeleteAsync(movie);
+            unitOfWork.Movies.Delete(movie);
+            await unitOfWork.SaveChangesAsync();
             return true;
         }
 
