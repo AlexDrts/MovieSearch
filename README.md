@@ -12,6 +12,7 @@
 ![React](https://img.shields.io/badge/React%2019-20232A?style=flat-square&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+[![CI](https://github.com/AlexDrts/MovieSearch/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexDrts/MovieSearch/actions/workflows/ci.yml)
 
 </div>
 
