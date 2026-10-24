@@ -98,6 +98,6 @@ docker run -p 8080:8080 moviesearch-api
 
 <div align="center">
 
-Made by [Alex](https://github.com/AlexDrts) 🌸
+Made by [Alex](https://github.com/AlexDrts) 😈
 
 </div>
